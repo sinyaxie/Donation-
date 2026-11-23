@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>Support Keovin</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;padding:24px 16px;display:grid;place-items:center;background:radial-gradient(circle at top,#243b60,#101827 58%);font-family:Arial,Helvetica,sans-serif;color:#f8fafc}
+    .card{width:100%;max-width:430px;background:#172235;border:1px solid #33445f;border-radius:25px;padding:28px 22px;box-shadow:0 22px 65px #0007;text-align:center}
+    .avatar{width:76px;height:76px;margin:0 auto 15px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#fbbf24,#f97316);color:#182235;font-size:30px;font-weight:900}
+    .tag{display:inline-block;padding:7px 12px;border-radius:30px;background:#263b57;color:#bfdbfe;font-size:12px;letter-spacing:1px;font-weight:bold}
+    h1{font-size:29px;margin:15px 0 9px}
+    .intro{color:#cbd5e1;line-height:1.6;font-size:15px;margin:0 0 22px}
+    .payment{background:#0f1929;border:1px solid #344761;border-radius:18px;padding:18px;margin:18px 0;text-align:left}
+    .small{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px}
+    .provider{font-size:19px;font-weight:bold;margin:8px 0 3px}
+    .number{font-size:25px;font-weight:800;letter-spacing:1px;color:#fbbf24;margin:5px 0 14px}
+    .copy{width:100%;border:0;border-radius:12px;padding:13px;background:#fbbf24;color:#172235;font-weight:800;font-size:15px;cursor:pointer}
+    .copy:active,.send:active{transform:scale(.98)}
+    h2{font-size:19px;margin:25px 0 8px}
+    .hint{font-size:13px;color:#94a3b8;line-height:1.5;margin:0 0 15px}
+    label{display:block;text-align:left;font-size:13px;color:#cbd5e1;margin:12px 0 6px}
+    input,textarea{width:100%;padding:13px;border-radius:11px;border:1px solid #40516b;background:#0f1929;color:white;font-size:15px;outline:none}
+    input:focus,textarea:focus{border-color:#fbbf24}
+    textarea{resize:vertical;min-height:75px}
+    .send{width:100%;margin-top:15px;padding:14px;border:0;border-radius:12px;background:#22c55e;color:#062512;font-weight:800;font-size:15px;cursor:pointer}
+    .foot{font-size:11px;color:#8291a7;line-height:1.5;margin:18px 0 0}
+    #status{font-size:12px;color:#86efac;min-height:17px;margin-top:8px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="avatar">KS</div>
+    <span class="tag">SUPPORT • APPRECIATION</span>
+    <h1>Support Keovin 🤍</h1>
+    <p class="intro">Kama maudhui yangu yanakufurahisha au kukusaidia, unaweza kunichangia chochote unachojisikia. Kiasi kidogo au kikubwa, ninashukuru sana! 🙏</p>
+
+    <section class="payment">
+      <div class="small">Tuma mchango kupitia</div>
+      <div class="provider">HaloPesa</div>
+      <div class="number" id="phone">0628954186</div>
+      <div class="small">Jina la mpokeaji</div>
+      <div style="font-weight:700;margin:6px 0 15px">Keovin Godfrey Sinyangwe</div>
+      <button class="copy" type="button" onclick="copyNumber()">Nakili namba 📋</button>
+      <div id="status" aria-live="polite"></div>
+    </section>
+
+    <h2>Umeshachangia? 😁</h2>
+    <p class="hint">Jaza hapa chini kuniambia umetuma mchango. Ujumbe utafunguka WhatsApp ili unitumie taarifa.</p>
+    <form id="thanksForm">
+      <label for="name">Jina lako (hiari)</label>
+      <input id="name" maxlength="60" placeholder="Andika jina lako">
+      <label for="amount">Kiasi ulichotuma (TSh)</label>
+      <input id="amount" inputmode="numeric" maxlength="12" placeholder="Mfano: 2,000" required>
+      <label for="message">Ujumbe mfupi (hiari)</label>
+      <textarea id="message" maxlength="250" placeholder="Endelea na kazi nzuri!"></textarea>
+      <button class="send" type="submit">Nimetuma mchango 💚</button>
+    </form>
+    <p class="foot">Asante kwa support yako. Mungu akubariki sana!<br>© Keovin</p>
+  </main>
+
+  <script>
+    function copyNumber(){
+      const number = "0628954186";
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(number).then(showCopied).catch(fallbackCopy);
+      } else { fallbackCopy(); }
+      function showCopied(){
+        document.getElementById("status").textContent = "Namba imenakiliwa! Sasa unaweza kwenda HaloPesa.";
+      }
+      function fallbackCopy(){
+        const field=document.createElement("textarea");
+        field.value=number;document.body.appendChild(field);field.select();
+        try{document.execCommand("copy");showCopied();}
+        catch(e){document.getElementById("status").textContent="Namba: "+number;}
+        field.remove();
+      }
+    }
+    document.getElementById("thanksForm").addEventListener("submit",function(e){
+      e.preventDefault();
+      const name=document.getElementById("name").value.trim() || "Mchangiaji";
+      const amount=document.getElementById("amount").value.trim();
+      const message=document.getElementById("message").value.trim() || "Endelea na kazi nzuri!";
+      const text=`Habari Keovin! Nimekuchangia kupitia HaloPesa.\\nJina: ${name}\\nKiasi: TSh ${amount}\\nUjumbe: ${message}\\nAsante!`;
+      window.open("https://wa.me/255628954186?text="+encodeURIComponent(text),"_blank");
+    });
+  </script>
+</body>
+</html>
